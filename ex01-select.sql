@@ -45,7 +45,7 @@ SELECT last_name, 12*salary*commission_pct, salary, commission_pct
 FROM employees;
 
 /*
-열 alias 정의
+열 alias(별칭) 정의
     열 머리글의 이름을 
     이름 바로 뒤에 나옴 (열 이름과 alias 사이에 선택 사항인 as 키워드가 올 수 있음.)
     공백이나 특수 문자를 포함하거나 대소문자를 구분하는 경우 큰 따음표가 필요
@@ -53,9 +53,9 @@ FROM employees;
 SELECT last_name as name, commission_pct comm, salary * 10 as 급여10배--as 생략시 띄어쓰기
 FROM employees;
 
-SELECT last_name "Name", salary*12 "Annual Salary"--둘다 as 생략, 띄어쓰기할려면 ""필요
+SELECT last_name "Name", salary*12 "Annual Salary"
 FROM employees;
-
+--띄어쓰기를 사용해둘다 as 생략함 띄어쓰기, 대소문자 구분하려면 ""필요
 /*
 연결연산자
     열이나 문자열을 다른열에 연결
@@ -69,10 +69,10 @@ FROM employees;
 /*
 리터럴 문자열
     리터럴은 SELECT 문에 포함된 문자, 숫자 또는 날짜
-    날짜 및 문자 리터럴 값은 작은 다옴표로 묶어야 함
+    문자 및 날짜 리터럴 값은 작은 다옴표''로 묶어야 함
     각 문자열은 반환되는 각 행에 한 번 출력 됨
 */
-SELECT last_name || ' is a ' || job_id AS "Employee Details"
+SELECT last_name || ' is a ' || job_id AS "Employee Details"-- is a는 문자이기 때문에 ''사용
 FROM employees;
 /* 
 대체 인용 q 연산자
@@ -97,7 +97,7 @@ SELECT department_id
 FROM employees;
 
 --중복제거
-SELECT DISTINCT department_id
+SELECT distinct department_id
 FROM employees;
 
 /*
@@ -105,5 +105,5 @@ FROM employees;
     DESCRIBE 명령을 사용해 테이블 구조를 표시
 */
 DESCRIBE employees;
-DESC employees;
+DESC employees;--줄임말 둘다 같은 동작
 
