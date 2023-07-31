@@ -1,43 +1,43 @@
 /*
-ÆÄÀÏ¸í: ex03-select-orderby.sql
+íŒŒì¼ëª…: ex03-select-orderby.sql
 
-ORDER BY Àı
-    ORDER BY ÀıÀ» »ç¿ëÇÏ¿© °Ë»öµÈ ÇàÀ» Á¤·ÄÇÕ´Ï´Ù.
-        ASC : ¿À¸§Â÷¼ø, ±âº»°ª
-        DESC : ³»¸²Â÷¼ø
-    SELECT ¹®ÀÇ¸Ç ¸¶Áö¸·¿¡ ¿È
+ORDER BY ì ˆ
+    ORDER BY í–‰ì„ ì •ë ¬
+        ASC ì˜¤ë¦„ì°¨ìˆœ, ê¸°ë³¸ê°’
+        DESC ë‚´ë¦¼ì°¨ìˆœ
+    SELECT ë¬¸ì˜ ë§ˆì§€ë§‰ì— ì˜´
 
-[select ¹® ±âº»Çü½Ä]    
-select (distict ÀÖÀ» ¼öµµ ¾øÀ» ¼öµµ,Áßº¹Á¦°Å) ÄÃ·³¸í1, ÄÃ·³¸í2 ...  .5
-from Å×ÀÌºí¸í                                                   .1
-where Á¶°ÇÀı                                                    .2
-group by ÄÃ·³¸í                                                 .3
-having Á¶°ÇÀı ±×·ì¿¡ ´ëÇÑ Á¶°Ç                                    .4
---order by ÄÃ·³¸í [asc|desc(¿À¸§|³»¸²)] Á¤·Ä                        .6(ÀÎ½Ä ¼ø¼­?)
+[select ë¬¸ ê¸°ë³¸í˜•ì‹]    
+select (distinct ì¤‘ë³µì œê±°) ì»¬ëŸ¼ëª…1, ì»¬ëŸ¼ëª…2 ...  .5
+from í…Œì´ë¸”ëª…                                                   .1
+where ì¡°ê±´ì ˆ                                                    .2
+group by ì»¬ëŸ¼ëª…                                                 .3
+having ì¡°ê±´ì ˆ ê·¸ë£¹ì— ëŒ€í•œ ì¡°ê±´                                    .4
+--order by ì»¬ëŸ¼ëª… [asc|desc(ì˜¤ë¦„|ë‚´ë¦¼)] ì •ë ¬                        .6(ì¸ì‹ ìˆœì„œ?)
 */
 
 SELECT last_name, job_id, department_id, hire_date
 FROM employees
-ORDER BY hire_date;--Á¤·Ä ±âº»°ª ¿À¸§Â÷¼ø(asc)
+ORDER BY hire_date;--ì •ë ¬ ê¸°ë³¸ê°’ ì˜¤ë¦„ì°¨ìˆœ(asc)
 
--- ³»¸²Â÷¼ø Á¤·Ä
+-- ë‚´ë¦¼ì°¨ìˆœ ì •ë ¬
 SELECT last_name, job_id, department_id, hire_date
 FROM employees
-ORDER BY hire_date DESC; --³»¸²Â÷¼ø
+ORDER BY hire_date DESC; --ë‚´ë¦¼ì°¨ìˆœ
 
--- ¿­ ALIAS¸¦ ±âÁØÀ¸·Î Á¤·Ä
-SELECT employee_id, last_name, salary*12 annsal--as »ı·«
+-- ì—´ ALIAS(ë³„ëª…)ë¥¼ ê¸°ì¤€ìœ¼ë¡œ ì •ë ¬ ê°€ëŠ¥!
+SELECT employee_id, last_name, salary*12 annsal--as ìƒëµ
 FROM employees
-ORDER BY annsal;
+ORDER BY annsal;--ORDER BY annsal desc;ëŠ” ë‚´ë¦¼ì°¨ìˆœ ì •ë ¬
 
--- ¼ıÀÚ·Î Á¤·Ä
-SELECT last_name, job_id, department_id,hire_date
+-- ìˆ«ìë¡œ ì •ë ¬ 
+SELECT last_name, job_id, department_id, hire_date
 FROM employees
-ORDER BY 3; --3¹øÂ° ÄÃ·³À» ±âÁØÀ¸·Î Á¤·Ä
+ORDER BY 3; --3ë²ˆì§¸ ì»¬ëŸ¼ì„ ê¸°ì¤€ìœ¼ë¡œ ì •ë ¬
 
--- ¿©·¯ ¿­À» ±âÁØÀ¸·Î Á¤·Ä
+-- ì—¬ëŸ¬ ì—´ì„ ê¸°ì¤€ìœ¼ë¡œ ì •ë ¬
 SELECT last_name, job_id, department_id, salary
 FROM employees
-ORDER BY department_id, salary DESC ;--1¹øÂ° ÄÃ·³À¸·Î Á¤·ÄÈÄ °°Àº °ª³¢¸® ³»¸²Â÷¼ø Á¤·Ä
+ORDER BY department_id, salary DESC ;--1ë²ˆì§¸ ì»¬ëŸ¼ìœ¼ë¡œ ì •ë ¬í›„(ê¸°ë³¸ê°’ asc) ê°™ì€ ê°’ë‚´ì—ì„œ ë‚´ë¦¼ì°¨ìˆœ ì •ë ¬
 
 
