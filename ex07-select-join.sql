@@ -1,37 +1,37 @@
 /*
-ÆÄÀÏ¸í: ex07-select-join.sql
+íŒŒì¼ëª…: ex07-select-join.sql
 
 join
-    µÎ°³ ÀÌ»óÀÇ Å×ÀÌºí¿¡¼­ °ü·Ã ÇàµéÀ» °áÇÕÇÏ±â À§ÇÑ ¿¬»ê
+    ë‘ê°œ ì´ìƒì˜ í…Œì´ë¸”ì—ì„œ ê´€ë ¨ í–‰ë“¤ì„ ê²°í•©í•˜ê¸° ìœ„í•œ ì—°ì‚°
 
 Natural join
-     µÎ Å×ÀÌºí¿¡¼­ µ¥ÀÌÅÍ À¯Çü°ú ÀÌ¸§ÀÌ °°Àº ¿­À» ±â¹İÀ¸·Î ÀÚµ¿À¸·Î
-     Å×ÀÌºíÀ» Á¶ÀÎ ÇÒ ¼ö ÀÖ´Ù
+     ë‘ í…Œì´ë¸”ì—ì„œ ë°ì´í„° ìœ í˜•ê³¼ ì´ë¦„ì´ ê°™ì€ ì—´ì„ ê¸°ë°˜ìœ¼ë¡œ ìë™ìœ¼ë¡œ
+     í…Œì´ë¸”ì„ ì¡°ì¸ í•  ìˆ˜ ìˆë‹¤
 */
-select department_id, department_name, location_id, city--city°ªÀ» join ÇÔÀ¸·Î½á ¾òÀ» ¼ö ÀÖÀ½
+select department_id, department_name, location_id, city--cityê°’ì„ join í•¨ìœ¼ë¡œì¨ ì–»ì„ ìˆ˜ ìˆìŒ
 from departments
 natural join locations;
 
-select * from departments;--µÎ Å×ÀÌºí ¸ğµÎ location_id°¡ ÀÖ¾î join°¡´É lo ¿Ü·¡¹øÈ£
-select * from locations;--lo°¡ °íÀ¯¹øÈ£ÀÓ
+select * from departments;--ë‘ í…Œì´ë¸” ëª¨ë‘ location_idê°€ ìˆì–´ joinê°€ëŠ¥ lo ì™¸ë˜ë²ˆí˜¸
+select * from locations;--loê°€ ê³ ìœ ë²ˆí˜¸ì„
 
 /*
-using Àı·Î Á¶ÀÎ
-    ¸í½ÃÀûÀ¸·Î °áÇÕÀ» ¼öÇàÇÏ°íÀÚÇÏ´Â ¿­À» Á¤ÇØÁÜ
+using ì ˆë¡œ ì¡°ì¸
+    ëª…ì‹œì ìœ¼ë¡œ ê²°í•©ì„ ìˆ˜í–‰í•˜ê³ ìí•˜ëŠ” ì—´ì„ ì •í•´ì¤Œ
     
 */
 
 select employee_id, last_name, location_id, department_id
 from employees join departments
-using (department_id);--de_id¸¦ ÅëÇØ¼­ joinÇÏ·Á´Â ¿­À» ¸í½Ã
+using (department_id);--de_idë¥¼ í†µí•´ì„œ joiní•˜ë ¤ëŠ” ì—´ì„ ëª…ì‹œ
 
 /*
-on Àı·Î Á¶ÀÎ
-    onÀ¸·Î join Á¶°ÇÀ» ÁöÁ¤- Á¦ÀÏ À¯¿ë
+on ì ˆë¡œ ì¡°ì¸
+    onìœ¼ë¡œ join ì¡°ê±´ì„ ì§€ì •- ì œì¼ ìœ ìš©
 */
 select e.employee_id, e.last_name, e.department_id,
     d.department_id, d.location_id
-from employees e join departments d--º°Äª
+from employees e join departments d--ë³„ì¹­
 on e.department_id = d.department_id;
 
 select e.employee_id, e.last_name,
@@ -41,27 +41,27 @@ where e.department_id = d.department_id;
 
 
 
--- on ÀıÀ» »ç¿ëÇØ 3-way Á¶ÀÎ
+-- on ì ˆì„ ì‚¬ìš©í•´ 3-way ì¡°ì¸
 select e.employee_id, l.city, d.department_name
 from employees e join departments d
 on e.department_id = d.department_id
 join locations l
 on d.location_id = l.location_id;
 
-select * from employees e;--ed´Â de_id°¡ Áßº¹ dlÀº lo_id°¡ Áßº¹ÀÌ¹Ç·Î µÎ¹ø onÀ» ÀÌ¿ëÇØ Ç®±â!
+select * from employees e;--edëŠ” de_idê°€ ì¤‘ë³µ dlì€ lo_idê°€ ì¤‘ë³µì´ë¯€ë¡œ ë‘ë²ˆ onì„ ì´ìš©í•´ í’€ê¸°!
 select * from departments d;
 select * from locations l;
 
--- Á¶ÀÎ¿¡ Ãß°¡ Á¶°Ç Àû¿ë
+-- ì¡°ì¸ì— ì¶”ê°€ ì¡°ê±´ ì ìš©
 select e.employee_id, e.last_name, e.department_id, e.manager_id,
     d.department_id, d.location_id
 from employees e join departments d
 on e.department_id = d.department_id
-and e.manager_id = 149;--Ãß°¡ Á¶°Ç
+and e.manager_id = 149;--ì¶”ê°€ ì¡°ê±´
 
 /* 
-Å×ÀÌºí ÀÚÃ¼ Á¶ÀÎ
-    on ÀıÀ» »ç¿ëÇÏ´Â self join 
+í…Œì´ë¸” ìì²´ ì¡°ì¸
+    on ì ˆì„ ì‚¬ìš©í•˜ëŠ” self join 
 */
 select worker.last_name e, manager.last_name m
 from employees worker join employees manager
@@ -71,7 +71,7 @@ select * from employees;
 
 /* 
 nonequijoin
-    µîÈ£ ¿¬»êÀÚ ¿ÜÀÇ ´Ù¸¥ ¿¬»êÀÚ¸¦ Æ÷ÇÔÇÏ´Â Á¶ÀÎ Á¶°Ç
+    ë“±í˜¸ ì—°ì‚°ì ì™¸ì˜ ë‹¤ë¥¸ ì—°ì‚°ìë¥¼ í¬í•¨í•˜ëŠ” ì¡°ì¸ ì¡°ê±´
 */
 
 DROP TABLE job_grades;
@@ -103,30 +103,30 @@ from employees e join job_grades j
 on e.salary between j.lowest_sal and j.highest_sal;
 
 /*
-inner join°ú outer join
+inner joinê³¼ outer join
     
     inner join
-        ÀÏÄ¡ÇÏÁö ¾Ê´Â ÇàÀº Ãâ·Â¿¡ Ç¥½ÃµÇÁö ¾ÊÀ½(±³ÁıÇÕ ÇØ´ç Çà Ãâ·Â)
+        ì¼ì¹˜í•˜ì§€ ì•ŠëŠ” í–‰ì€ ì¶œë ¥ì— í‘œì‹œë˜ì§€ ì•ŠìŒ(êµì§‘í•© í•´ë‹¹ í–‰ ì¶œë ¥)
     
     outer join
-        ÇÑ Å×ÀÌºíÀÇ ÇàÀ» ±â¹İÀ¸·Î ´Ù¸¥ Å×ÀÌºí°úÀÇ ¿¬°áÀÌ ¾ø´Â Çà±îÁö Æ÷ÇÔÇØ ¹İÈ¯ ¿©ÁıÇÕµµ Æ÷ÇÔ
+        í•œ í…Œì´ë¸”ì˜ í–‰ì„ ê¸°ë°˜ìœ¼ë¡œ ë‹¤ë¥¸ í…Œì´ë¸”ê³¼ì˜ ì—°ê²°ì´ ì—†ëŠ” í–‰ê¹Œì§€ í¬í•¨í•´ ë°˜í™˜ ì—¬ì§‘í•©ë„ í¬í•¨
         
-left outer join(±âÁØÀÌ ¿ŞÂÊ)
-    department  Å×ÀÌºí¿¡ ´ëÀÀµÇ´Â ÇàÀÌ ¾ø¾îµµ nullÀÌÀÖ¾îµµ
-    ¿ŞÂÊ Å×ÀÌºíÀÎ employees Å×ÀÌºíÀÇ ¸ğµç ÇàÀ» °Ë»ö
+left outer join(ê¸°ì¤€ì´ ì™¼ìª½)
+    department  í…Œì´ë¸”ì— ëŒ€ì‘ë˜ëŠ” í–‰ì´ ì—†ì–´ë„ nullì´ìˆì–´ë„
+    ì™¼ìª½ í…Œì´ë¸”ì¸ employees í…Œì´ë¸”ì˜ ëª¨ë“  í–‰ì„ ê²€ìƒ‰
 */
 select e.last_name, e.department_id, d.department_name
-from employees e left outer join department d--°ãÄ¡Áö ¾Ê´Â °Íµµ Á¶È¸
+from employees e left outer join department d--ê²¹ì¹˜ì§€ ì•ŠëŠ” ê²ƒë„ ì¡°íšŒ
 on e.department_id = d.department_id;
 
 select e.last_name, e.department_id, d.department_name
-from employees e , department d--°ãÄ¡Áö ¾Ê´Â °Íµµ Á¶È¸
-where e.department_id = d.department_id(+);--left¸é ¿À¸¥ÂÊ¿¡ (+)--ÀÌ°Ç ÇÊ¿äx
+from employees e , department d--ê²¹ì¹˜ì§€ ì•ŠëŠ” ê²ƒë„ ì¡°íšŒ
+where e.department_id = d.department_id(+);--leftë©´ ì˜¤ë¥¸ìª½ì— (+)--ì´ê±´ í•„ìš”x
 
 /*
-right outer join(±âÁØÀÌ ¿À¸¥ÂÊ)
-    employees Å×ÀÌºí¿¡ ´ëÀÀµÇ´Â ÇàÀÌ ¾ø¾îµµ nullÀÌ¾îµµ
-    ¿À¸¥ÂÊ Å×ÀÌºíÀÎ departments Å×ÀÌºíÀÇ ¸ğµç ÇàÀ» °Ë»öÇÕ´Ï´Ù.
+right outer join(ê¸°ì¤€ì´ ì˜¤ë¥¸ìª½)
+    employees í…Œì´ë¸”ì— ëŒ€ì‘ë˜ëŠ” í–‰ì´ ì—†ì–´ë„ nullì´ì–´ë„
+    ì˜¤ë¥¸ìª½ í…Œì´ë¸”ì¸ departments í…Œì´ë¸”ì˜ ëª¨ë“  í–‰ì„ ê²€ìƒ‰í•©ë‹ˆë‹¤.
 */
 select e.last_name, e.department_id, d.department_name
 from employees e right outer join department d
@@ -134,8 +134,8 @@ on e.department_id = d.department_id;
 
 /*
 full outer join
-    department, employees ´ëÀÀµÇ´Â ÇàÀÌ ¾ø¾îµµ
-    Å×ÀÌºíÀÇ ¸ğµçÇàÀ» °Ë»ö (¾çÂÊ)
+    department, employees ëŒ€ì‘ë˜ëŠ” í–‰ì´ ì—†ì–´ë„
+    í…Œì´ë¸”ì˜ ëª¨ë“ í–‰ì„ ê²€ìƒ‰ (ì–‘ìª½)
 */
 select e.last_name, e.department_id, d.department_name
 from employees e full outer join department d
@@ -143,12 +143,12 @@ on e.department_id = d.department_id;
 
 /*
 cartesian product
-    Á¶ÀÎ Á¶°ÇÀÌ Àß¸øµÇ°Å³ª ¿ÏÀüÈ÷ »ı·«µÈ °æ¿ì °á°ú°¡ ¸ğµç ÇàÀÇ Á¶ÇÕÀÌ Ç¥½ÃµÇ´Â 
-    cartesian product·Î ³ªÅ¸³¿(¸ğµç °æ¿ì°¡ ´Ù ³ª¿È)
+    ì¡°ì¸ ì¡°ê±´ì´ ì˜ëª»ë˜ê±°ë‚˜ ì™„ì „íˆ ìƒëµëœ ê²½ìš° ê²°ê³¼ê°€ ëª¨ë“  í–‰ì˜ ì¡°í•©ì´ í‘œì‹œë˜ëŠ” 
+    cartesian productë¡œ ë‚˜íƒ€ëƒ„(ëª¨ë“  ê²½ìš°ê°€ ë‹¤ ë‚˜ì˜´)
 
 
 cross join 
-    µÎ Å×ÀÌºíÀÇ ±³Â÷ °öÀ» »ı¼ºÇÕ´Ï´Ù.
+    ë‘ í…Œì´ë¸”ì˜ êµì°¨ ê³±ì„ ìƒì„±í•©ë‹ˆë‹¤.
 */
 select last_name, department_name
 from employees
